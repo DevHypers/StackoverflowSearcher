@@ -86,7 +86,7 @@ async def ping(ctx):
 
 @bot.command()
 async def s(ctx):
-    q = ctx[7:]
+    q = ctx.message.content[7:]
 
     if not q:
         await ctx.send(f"<@{ctx.author.id}>, You entered the wrong command. Learn how to use it with `!so help`")
