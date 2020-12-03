@@ -104,7 +104,7 @@ async def s(ctx):
 
     for i in range(pages):
         embed.append(discord.Embed(title="Stackoverflow Questions",
-                                   description=f"**Search: {q}**\n**Page: " + str(i + 1) + "/" + str(pages) + "**", color=0xD47B1E))
+                                   description=f"**Search Word: {q}**\n**Page: " + str(i + 1) + "/" + str(pages) + "**", color=0xD47B1E))
 
     for i in range(pages):
         for j in range(i * 5, i * 5 + 5):
