@@ -71,6 +71,8 @@ async def help(ctx):
     except:
         await ctx.send(
             f"<@{ctx.author.id}>, Direct mail transmission failed. You have blocked the bot or check your privacy settings.")
+    else:
+        await ctx.send(f"<@{ctx.author.id}>, I sent a direct message")
 
 
 @bot.command()
