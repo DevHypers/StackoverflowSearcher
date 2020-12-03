@@ -103,7 +103,10 @@ async def s(ctx):
         await ctx.send(f"<@{ctx.author.id}>, No results found")
         return
 
-    pages = (int) (len(result["titles"]) / 5)
+    if ((int) (len(result["titles"]))) < 5:
+        pages = 1
+    else:
+        pages = (int) (len(result["titles"]) / 5)
 
     embed = []
 
@@ -113,8 +116,11 @@ async def s(ctx):
 
     for i in range(pages):
         for j in range(i * 5, i * 5 + 5):
-            embed[i].add_field(name="\u200b", value=f"[{str(result['titles'][j])}]({str(result['links'][j])})",
-                               inline=False)
+            try:
+                embed[i].add_field(name="\u200b", value=f"[{str(result['titles'][j])}]({str(result['links'][j])})",
+                                   inline=False)
+            except:
+                break
 
     cur_page = 1
 
