@@ -66,9 +66,11 @@ async def help(ctx):
     embed.add_field(name="**Example Usage:**",
                     value="!so s 파이썬 포스트\n- Search after translation into English\n- Supports almost all languages",
                     inline=False)
-
-    await ctx.author.send(embed=embed)
-
+    try:
+        await ctx.author.send(embed=embed)
+    except:
+        await ctx.send(
+            f"<@{ctx.author.id}>, Direct mail transmission failed. You have blocked the bot or check your privacy settings.")
 
 
 @bot.command()
@@ -83,7 +85,13 @@ async def ping(ctx):
 
 
 @bot.command()
-async def s(ctx, q):
+async def s(ctx):
+    q = ctx[7:]
+
+    if not q:
+        await ctx.send(f"<@{ctx.author.id}>, You entered the wrong command. Learn how to use it with `!so help`")
+        return
+
     translator = google_translator()
 
     if not str(q).encode().isalpha():
@@ -143,9 +151,6 @@ async def s(ctx, q):
 
 @bot.event
 async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandInvokeError):
-        await ctx.send(f"<@{ctx.author.id}>, Direct mail transmission failed. You have blocked the bot or check your privacy settings.")
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(f"<@{ctx.author.id}>, You entered the wrong command. Learn how to use it with `!so help`")
+    pass
 
 bot.run(token)
