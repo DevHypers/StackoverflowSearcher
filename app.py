@@ -62,7 +62,7 @@ async def on_ready():
 async def help(ctx):
     embed = discord.Embed(title="StackoverflowSearcher Help",
                           description="**Commands: **", color=0xD47B1E)
-    embed.add_field(name="!so s", value="**Description**: **Main** command of bot that shows Questions.", inline=False)
+    embed.add_field(name="!so s, !so search", value="**Description**: **Main** command of bot that shows Questions.", inline=False)
     embed.add_field(name="**Example Usage:**",
                     value="!so s 파이썬 포스트\n- Search after translation into English\n- Supports almost all languages",
                     inline=False)
@@ -84,8 +84,8 @@ async def ping(ctx):
     print(f'Ping {int(ping)}ms')
 
 
-@bot.command()
-async def s(ctx):
+@bot.command(aliases=['s', 'search'])
+async def search(ctx):
     q = ctx.message.content[6:]
 
     if not q:
