@@ -27,7 +27,7 @@ async def getQuestions(q):
 
     try:
         data["items"][0]
-    except IndexError:
+    except:
         print("No results found")
         return False
 
