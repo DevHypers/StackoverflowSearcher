@@ -29,7 +29,7 @@ async def getQuestions(q):
         data["items"][0]
     except:
         print("No results found")
-        return 404
+        return
 
     title = []
     link = []
@@ -98,12 +98,12 @@ async def s(ctx):
         q = translator.translate(str(q), lang_tgt="en")
 
     result = await getQuestions(q)
-    pages = (int)(len(result["titles"]) / 5)
 
-    print(result)
-    if result == 404:
-        await ctx.send("No results found")
+    if not result:
+        await ctx.send(f"<@{ctx.author.id}>, No results found")
         return
+
+    pages = (int) (len(result["titles"]) / 5)
 
     embed = []
 
@@ -153,9 +153,5 @@ async def s(ctx):
             break
             # ending the loop if user doesn't react after x seconds
 
-
-@bot.event
-async def on_command_error(ctx, error):
-    pass
 
 bot.run(token)
