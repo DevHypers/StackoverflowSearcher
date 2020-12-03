@@ -64,7 +64,7 @@ async def help(ctx):
                           description="**Commands: **", color=0xD47B1E)
     embed.add_field(name="!so s, !so search", value="**Description**: **Main** command of bot that shows Questions.", inline=False)
     embed.add_field(name="**Example Usage:**",
-                    value="!so s 파이썬 포스트\n- Search after translation into English\n- Supports almost all languages",
+                    value="!so s 파이썬 포스트\n!so search 파이썬 포스트\n- Search after translation into English\n- Supports almost all languages",
                     inline=False)
     try:
         await ctx.author.send(embed=embed)
