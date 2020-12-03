@@ -161,7 +161,7 @@ async def s(ctx):
 
 
 @bot.command()
-async def s(ctx):
+async def search(ctx):
     q = ctx.message.content[10:]
 
     if not q:
