@@ -9,6 +9,7 @@ bot.remove_command('help')
 
 token = os.environ["TOKEN"]
 
+
 async def bt(games):
     await bot.wait_until_ready()
     while not bot.is_closed():
@@ -19,11 +20,6 @@ async def bt(games):
 
 
 async def getQuestions(q):
-    translator = google_translator()
-
-    if not str(q).encode().isalpha():
-        q = translator.translate(str(q), lang_tgt="en")
-
     url = "https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q="
 
     data = requests.get(url + q)
@@ -88,6 +84,11 @@ async def ping(ctx):
 
 @bot.command()
 async def s(ctx, q):
+    translator = google_translator()
+
+    if not str(q).encode().isalpha():
+        q = translator.translate(str(q), lang_tgt="en")
+
     result = await getQuestions(q)
     pages = (int)(len(result["titles"]) / 5)
 
@@ -95,7 +96,7 @@ async def s(ctx, q):
 
     for i in range(pages):
         embed.append(discord.Embed(title="Stackoverflow Questions",
-                                   description="**Page: " + str(i + 1) + "/" + str(pages) + "**", color=0xD47B1E))
+                                   description=f"**Search: {q}**\n**Page: " + str(i + 1) + "/" + str(pages) + "**", color=0xD47B1E))
 
     for i in range(pages):
         for j in range(i * 5, i * 5 + 5):
@@ -143,7 +144,7 @@ async def s(ctx, q):
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandInvokeError):
-        await ctx.send("Direct mail transmission failed. You have blocked the bot or check your privacy settings.")
+        await ctx.send(f"<@{ctx.author.id}>, Direct mail transmission failed. You have blocked the bot or check your privacy settings.")
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send(f"<@{ctx.author.id}>, You entered the wrong command. Learn how to use it with `!so help`")
 
