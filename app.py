@@ -86,7 +86,7 @@ async def ping(ctx):
 
 @bot.command()
 async def s(ctx):
-    q = ctx.message.content[7:]
+    q = ctx.message.content[6:]
 
     if not q:
         await ctx.send(f"<@{ctx.author.id}>, You entered the wrong command. Learn how to use it with `!so help`")
@@ -99,6 +99,10 @@ async def s(ctx):
 
     result = await getQuestions(q)
     pages = (int)(len(result["titles"]) / 5)
+
+    if result == "No results found":
+        ctx.send("No results found")
+        return 
 
     embed = []
 
