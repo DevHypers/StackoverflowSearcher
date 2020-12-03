@@ -29,7 +29,7 @@ async def getQuestions(q):
         data["items"][0]
     except IndexError:
         print("No results found")
-        return "No results found"
+        return False
 
     title = []
     link = []
@@ -100,7 +100,7 @@ async def s(ctx):
     result = await getQuestions(q)
     pages = (int)(len(result["titles"]) / 5)
 
-    if result == "No results found":
+    if not result:
         await ctx.send("No results found")
         return
 
