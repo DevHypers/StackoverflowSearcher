@@ -101,8 +101,8 @@ async def s(ctx):
     pages = (int)(len(result["titles"]) / 5)
 
     if result == "No results found":
-        ctx.send("No results found")
-        return 
+        await ctx.send("No results found")
+        return
 
     embed = []
 
