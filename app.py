@@ -34,11 +34,11 @@ async def getQuestions(q):
     title = []
     link = []
 
-    for i in range(0, 100):
+    for i in range(0, 300):
         try:
             title.append(html.unescape(data["items"][i]["title"]))
             link.append(html.unescape(data["items"][i]["link"]))
-        except IndexError:
+        except:
             break
 
     return {'titles': title, 'links': link}
